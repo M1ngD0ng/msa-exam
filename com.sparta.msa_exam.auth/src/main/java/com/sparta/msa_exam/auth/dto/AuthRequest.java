@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 @Getter
-public class SignupRequest {
+public class AuthRequest {
 	@NotNull(message = "아이디를 입력해주세요.")
 	private String username;
 

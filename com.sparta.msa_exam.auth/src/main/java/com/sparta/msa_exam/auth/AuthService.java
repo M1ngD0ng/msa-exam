@@ -9,7 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sparta.msa_exam.auth.dto.SignupRequest;
+import com.sparta.msa_exam.auth.dto.AuthRequest;
+import com.sparta.msa_exam.auth.dto.SignInResponse;
 import com.sparta.msa_exam.auth.dto.SignupResponse;
 
 import io.jsonwebtoken.Jwts;
@@ -44,18 +45,28 @@ public class AuthService {
 	}
 
 	@Transactional
-	public SignupResponse signUp(SignupRequest signupRequest) {
-		if(userRepository.existsByUsername(signupRequest.getUsername())) throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
+	public SignupResponse signUp(AuthRequest authRequest) {
+		if(userRepository.existsByUsername(authRequest.getUsername())) throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
 
 		User user = userRepository.save(
 			User.of(
-				signupRequest.getUsername(),
-				passwordEncoder.encode(signupRequest.getPassword())
+				authRequest.getUsername(),
+				passwordEncoder.encode(authRequest.getPassword())
 			)
 		);
 		return new SignupResponse(
 			user.getId(),
 			user.getUsername()
+		);
+	}
+
+	public SignInResponse signIn(AuthRequest authRequest) {
+		User user = userRepository.findByUsername(authRequest.getUsername()).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+
+		if(!passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+
+		return new SignInResponse(
+			createAccessToken(user.getUsername())
 		);
 	}
 
