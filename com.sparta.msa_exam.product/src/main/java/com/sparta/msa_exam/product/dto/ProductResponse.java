@@ -1,11 +1,13 @@
 package com.sparta.msa_exam.product.dto;
 
+import java.io.Serializable;
+
 import com.sparta.msa_exam.product.entity.Product;
 
 import lombok.Getter;
 
 @Getter
-public class ProductResponse {
+public class ProductResponse implements Serializable {
 	private Long id;
 	private String name;
 	private Integer supplyPrice;
