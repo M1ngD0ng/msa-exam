@@ -1,5 +1,6 @@
 package com.sparta.msa_exam.order.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.sparta.msa_exam.order.entity.Order;
@@ -8,7 +9,7 @@ import com.sparta.msa_exam.order.entity.OrderProduct;
 import lombok.Getter;
 
 @Getter
-public class OrderResponse {
+public class OrderResponse implements Serializable {
 	private Long id;
 	private List<Long> productIds;
 

@@ -2,6 +2,7 @@ package com.sparta.msa_exam.order.service;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.sparta.msa_exam.order.dto.OrderCreateRequest;
@@ -33,6 +34,7 @@ public class OrderService {
 		return orderTransactionService.updateOrder(order, request.getProductId());
 	}
 
+	@Cacheable(cacheNames = "orderCache", key = "args[1]")
 	public OrderResponse getOrder(String username, Long orderId) {
 		Order order = orderTransactionService.getValidateOrder(orderId, username);
 		return OrderResponse.fromEntity(order);
