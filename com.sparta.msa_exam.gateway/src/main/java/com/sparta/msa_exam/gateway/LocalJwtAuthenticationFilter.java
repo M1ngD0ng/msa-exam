@@ -36,11 +36,18 @@ public class LocalJwtAuthenticationFilter implements GlobalFilter {
 		}
 
 		String token = extractToken(exchange);
+		String username = extractUsernameFromToken(token);
 
-		if (token == null || !validateToken(token)) {
+		if (token == null || !validateToken(token) || username == null) {
 			exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
 			return exchange.getResponse().setComplete();
 		}
+
+		exchange = exchange.mutate().request(
+			exchange.getRequest().mutate()
+				.header("X-Username", username)
+				.build()
+		).build();
 
 		return chain.filter(exchange);
 	}
@@ -68,14 +75,13 @@ public class LocalJwtAuthenticationFilter implements GlobalFilter {
 		}
 	}
 
-	private String extractUserIdFromToken(String token) {
+	private String extractUsernameFromToken(String token) {
 		try {
 			// 토큰 파싱 및 클레임 추출
 			SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64URL.decode(secretKey));
-
 			Claims claims = Jwts.parser().verifyWith(key).build().parseSignedClaims(token).getPayload();
 			// "username" 클레임에서 사용자 ID 추출
-			return claims.get("username", String.class);
+			return claims.get("username").toString();
 		} catch (Exception e) {
 			// 예외 발생 시 null 반환 (토큰이 유효하지 않음)
 			return null;
