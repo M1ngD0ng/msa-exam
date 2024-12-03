@@ -1,4 +1,4 @@
-package com.sparta.msa_exam.auth.global;
+package com.sparta.msa_exam.auth.dto;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sparta.msa_exam.product.dto.ProductCreateRequest;
-import com.sparta.msa_exam.product.global.CustomResponse;
+import com.sparta.msa_exam.product.dto.CustomResponse;
 import com.sparta.msa_exam.product.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
