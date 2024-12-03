@@ -1,5 +1,7 @@
 package com.sparta.msa_exam.product.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,12 +28,11 @@ public class ProductService {
 				username
 			)
 		);
-		return new ProductResponse(
-			product.getId(),
-			product.getName(),
-			product.getSupplyPrice(),
-			product.getCreatedBy(),
-			product.getCreatedAt().toString()
-		);
+		return ProductResponse.fromEntity(product);
 	}
+
+	public List<ProductResponse> getProducts(){
+		return productRepository.findAllOrderByCreatedAtDesc().stream().map(ProductResponse::fromEntity).toList();
+	}
+
 }

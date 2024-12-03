@@ -2,6 +2,7 @@ package com.sparta.msa_exam.product.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -32,6 +33,18 @@ public class ProductController {
 					.status(HttpStatus.OK.value())
 					.message("상품 등록이 완료되었습니다.")
 					.data(productService.createProduct(productCreateRequest, username))
+					.build()
+			);
+	}
+
+	@GetMapping
+	public ResponseEntity<?> getProducts() {
+		return ResponseEntity.status(HttpStatus.OK)
+			.body(
+				CustomResponse.builder()
+					.status(HttpStatus.OK.value())
+					.message("상품 목록 조회가 완료되었습니다.")
+					.data(productService.getProducts())
 					.build()
 			);
 	}

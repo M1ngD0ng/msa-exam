@@ -6,7 +6,7 @@ spring:
     name: product-service
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: ${DB_URL}
+    url: ${DB_URL}/msa_product
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 
