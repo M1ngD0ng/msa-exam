@@ -2,6 +2,7 @@ package com.sparta.msa_exam.order;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -50,6 +51,21 @@ public class OrderController {
 					.status(HttpStatus.OK.value())
 					.message("상품 주문 수정이 완료되었습니다.")
 					.data(orderService.updateOrder(orderUpdateRequest, username, orderId))
+					.build()
+			);
+	}
+
+	@GetMapping("/{orderId}")
+	public ResponseEntity<?> getOrder(
+		@RequestHeader("X-Username") String username,
+		@PathVariable Long orderId
+	){
+		return ResponseEntity.status(HttpStatus.OK)
+			.body(
+				CustomResponse.builder()
+					.status(HttpStatus.OK.value())
+					.message("상품 주문 단건 조회가 완료되었습니다.")
+					.data(orderService.getOrder(username, orderId))
 					.build()
 			);
 	}

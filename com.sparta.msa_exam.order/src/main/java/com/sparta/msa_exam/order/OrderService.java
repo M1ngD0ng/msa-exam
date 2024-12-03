@@ -45,8 +45,16 @@ public class OrderService {
 
 		OrderProduct orderProduct = OrderProduct.of(order, request.getProductId());
 		order.addOrderProduct(orderProduct);
-		return OrderResponse.fromEntity(orderRepository.save(order));
+		return OrderResponse.fromEntity(
+			orderRepository.save(order)
+		);
 	}
+	
+	public OrderResponse getOrder(String username, Long orderId) {
+		Order order = getValidatedOrder(orderId, username);
+		return OrderResponse.fromEntity(order);
+	}
+	
 
 	private void validateProduct(Long productId) {
 		CustomResponse<Void> response = productClient.validateProduct(productId);
@@ -63,10 +71,10 @@ public class OrderService {
 	}
 
 	private Order getValidatedOrder(Long orderId, String username) {
-		Order order = orderRepository.findById(orderId)
+		Order order = orderRepository.findByIdWithOrderProducts(orderId)
 			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 주문 정보입니다."));
 		if (!order.getCreatedBy().equals(username))
-			throw new IllegalArgumentException("주문 수정 권한이 없습니다.");
+			throw new IllegalArgumentException("주문 접근 권한이 없습니다.");
 		return order;
 	}
 }
