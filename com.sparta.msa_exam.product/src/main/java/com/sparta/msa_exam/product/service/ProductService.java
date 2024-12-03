@@ -35,4 +35,7 @@ public class ProductService {
 		return productRepository.findAllOrderByCreatedAtDesc().stream().map(ProductResponse::fromEntity).toList();
 	}
 
+	public void validateProduct(Long productId) {
+		if(!productRepository.existsById(productId)) throw new IllegalArgumentException("존재하지 않는 상품입니다.");
+	}
 }

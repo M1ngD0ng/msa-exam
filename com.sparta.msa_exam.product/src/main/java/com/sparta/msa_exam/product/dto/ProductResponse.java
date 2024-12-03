@@ -2,7 +2,6 @@ package com.sparta.msa_exam.product.dto;
 
 import com.sparta.msa_exam.product.entity.Product;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
@@ -13,16 +12,22 @@ public class ProductResponse {
 	private String createdBy;
 	private String createdAt;
 
-	private ProductResponse(Product product) {
-		this.id = product.getId();
-		this.name = product.getName();
-		this.supplyPrice = product.getSupplyPrice();
-		this.createdBy = product.getCreatedBy();
-		this.createdAt = product.getCreatedAt().toString();
+	private ProductResponse(Long id, String name, Integer supplyPrice, String createdBy, String createdAt) {
+		this.id = id;
+		this.name = name;
+		this.supplyPrice = supplyPrice;
+		this.createdBy = createdBy;
+		this.createdAt = createdAt;
 	}
 
 	public static ProductResponse fromEntity(Product product) {
-		return new ProductResponse(product);
+		return new ProductResponse(
+			product.getId(),
+			product.getName(),
+			product.getSupplyPrice(),
+			product.getCreatedBy(),
+			product.getCreatedAt().toString()
+		);
 	}
 
 }
