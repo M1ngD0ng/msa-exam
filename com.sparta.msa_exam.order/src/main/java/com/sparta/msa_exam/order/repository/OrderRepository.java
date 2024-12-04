@@ -1,4 +1,4 @@
-package com.sparta.msa_exam.order;
+package com.sparta.msa_exam.order.repository;
 
 import java.util.Optional;
 

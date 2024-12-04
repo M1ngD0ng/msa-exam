@@ -1,4 +1,4 @@
-package com.sparta.msa_exam.order;
+package com.sparta.msa_exam.order.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sparta.msa_exam.order.dto.OrderCreateRequest;
 import com.sparta.msa_exam.order.dto.OrderUpdateRequest;
-import com.sparta.msa_exam.order.global.CustomResponse;
+import com.sparta.msa_exam.order.dto.CustomResponse;
 import com.sparta.msa_exam.order.service.OrderService;
 
 import lombok.RequiredArgsConstructor;

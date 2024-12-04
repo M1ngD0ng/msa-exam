@@ -1,4 +1,4 @@
-package com.sparta.msa_exam.auth;
+package com.sparta.msa_exam.auth.service;
 
 import java.util.Date;
 
@@ -9,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sparta.msa_exam.auth.entity.User;
+import com.sparta.msa_exam.auth.repository.UserRepository;
 import com.sparta.msa_exam.auth.dto.AuthRequest;
 import com.sparta.msa_exam.auth.dto.SignInResponse;
 import com.sparta.msa_exam.auth.dto.SignupResponse;

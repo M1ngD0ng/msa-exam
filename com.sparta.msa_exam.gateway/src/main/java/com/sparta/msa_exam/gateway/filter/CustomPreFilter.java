@@ -1,4 +1,4 @@
-package com.sparta.msa_exam.gateway;
+package com.sparta.msa_exam.gateway.filter;
 
 import java.util.logging.Logger;
 

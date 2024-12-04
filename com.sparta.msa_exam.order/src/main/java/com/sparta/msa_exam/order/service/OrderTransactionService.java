@@ -3,7 +3,7 @@ package com.sparta.msa_exam.order.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sparta.msa_exam.order.OrderRepository;
+import com.sparta.msa_exam.order.repository.OrderRepository;
 import com.sparta.msa_exam.order.dto.OrderResponse;
 import com.sparta.msa_exam.order.entity.Order;
 import com.sparta.msa_exam.order.entity.OrderProduct;

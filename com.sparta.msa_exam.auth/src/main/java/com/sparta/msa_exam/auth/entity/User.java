@@ -1,4 +1,4 @@
-package com.sparta.msa_exam.auth;
+package com.sparta.msa_exam.auth.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
